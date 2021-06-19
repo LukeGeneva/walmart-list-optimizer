@@ -1,9 +1,10 @@
 const puppeteer = require('puppeteer');
+const { bestAisleByFirst } = require('./best-aisle-strategies');
 
 const locateItem = async (storeId, item) => {
   const html = await getSearchHTMLContent(storeId, item);
   const aisles = findAislesIn(html);
-  const bestAisle = getBestAisle(aisles);
+  const bestAisle = bestAisleByFirst(aisles);
   return bestAisle;
 };
 
@@ -24,19 +25,5 @@ const getSearchHTMLContent = async (storeId, item) => {
 
 const findAislesIn = (content) =>
   (content.match(/Aisle [A-Z]\.[0-9]+/g) || []).map((m) => m);
-
-const getBestAisle = (aisles = []) => {
-  const counts = aisles.reduce((counts, aisle) => {
-    counts[aisle] = counts[aisle] || 0;
-    counts[aisle] += 1;
-    return counts;
-  }, {});
-  const [bestAisle] = Object.entries(counts).reduce(
-    ([bestAisle, bestCount], [aisle, count]) =>
-      count > bestCount ? [aisle, count] : [bestAisle, bestCount],
-    ['Not Found', 0]
-  );
-  return bestAisle.split(' ')[1];
-};
 
 module.exports = { locateItem };
