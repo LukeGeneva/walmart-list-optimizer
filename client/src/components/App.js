@@ -5,23 +5,29 @@ function App() {
   const [storeId, setStoreId] = React.useState('4475-olathe-ks');
   const [item, setItem] = React.useState('');
   const [items, setItems] = React.useState([]);
+  const [rerender, setRerender] = React.useState(0);
+  const itemsWithLocation = React.useRef([]);
   const itemRef = React.useRef();
 
   const addItem = async (e) => {
     e.preventDefault();
+    setItems([...items, { name: item }]);
+    setItem('');
+    itemRef.current.focus();
     const response = await fetch(
       `http://localhost:3001/store/${storeId}?item=${item}`
     );
     const { aisle } = await response.json();
+    console.log(`${item} - ${aisle}`);
     const [section, row] = aisle.split('.');
-    setItems(
-      sortBy(
-        [...items, { name: item, section, row: parseInt(row) }],
-        ['section', 'row']
-      )
+    itemsWithLocation.current = sortBy(
+      [
+        ...itemsWithLocation.current,
+        { name: item, section, row: parseInt(row) },
+      ],
+      ['section', 'row']
     );
-    setItem('');
-    itemRef.current.focus();
+    setRerender(rerender + 1);
   };
 
   return (
@@ -50,11 +56,18 @@ function App() {
       </div>
       <div>
         <ul>
-          {items.map((i) => (
-            <li key={i.name}>
-              {i.name} - {i.section}.{i.row}
-            </li>
-          ))}
+          {itemsWithLocation.current
+            .concat(
+              items.filter(
+                (i) =>
+                  !itemsWithLocation.current.some((iwl) => iwl.name === i.name)
+              )
+            )
+            .map((i) => (
+              <li key={`${i.name}-${i.section}`}>
+                {i.name} - {i.section && `${i.section}.${i.row}`}
+              </li>
+            ))}
         </ul>
       </div>
     </div>
