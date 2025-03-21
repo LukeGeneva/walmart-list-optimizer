@@ -1,15 +1,11 @@
-# walmart-list-optimizer
+# Walmart List Optimizer
 
-To install dependencies:
+This project is a Chrome extension that is meant to run on the Walmart website.
+When a store is selected, it runs on item pages and extracts the aisle that the
+item is located in. If it finds the aisle, it renders a button alongside "Add to
+cart" that says "Add to List." Upon clicking this button, the item is added to a
+list for you that is sorted by location.
 
-```bash
-bun install
-```
+For people who like doing their shopping themselves, it streamlines the trip to
+the store by allowing you to get all of the things on the list in one pass.
 
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
