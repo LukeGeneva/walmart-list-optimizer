@@ -1,0 +1,15 @@
+{
+  "name": "walmart-list-optimizer",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bun build content.ts --outdir build",
+    "build:watch": "bun run build --watch"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

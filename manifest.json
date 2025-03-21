@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Walmart List Optimizer",
+  "version": "1.0",
+  "permissions": ["scripting", "activeTab", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["*://*.walmart.com/search/*", "*://*.walmart.com/ip/*"],
+      "js": ["build/content.js"]
+    }
+  ]
+}
+
