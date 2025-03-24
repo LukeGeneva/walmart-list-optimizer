@@ -1,0 +1,15 @@
+body {
+    padding: 1rem;
+}
+
+input {
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+}
+
+#login-form {
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

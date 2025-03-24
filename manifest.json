@@ -2,7 +2,10 @@
   "manifest_version": 3,
   "name": "Walmart List Optimizer",
   "version": "1.0",
-  "permissions": ["scripting", "activeTab", "storage"],
+  "permissions": ["scripting", "activeTab", "storage", "identity"],
+  "action": {
+    "default_popup": "build/popup.html"
+  },
   "content_scripts": [
     {
       "matches": ["*://*.walmart.com/search/*", "*://*.walmart.com/ip/*"],
@@ -10,4 +13,3 @@
     }
   ]
 }
-
