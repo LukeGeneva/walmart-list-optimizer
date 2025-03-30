@@ -1,4 +1,5 @@
 const API_BASE_URL = 'https://walmart-list.l8a.dev';
+//const API_BASE_URL = 'http://localhost:3000';
 
 type AddItemToListInput = {
   name: string;
