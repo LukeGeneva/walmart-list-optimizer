@@ -8,6 +8,7 @@ type PageItem = {
   name: string;
   aisle: string;
   imgSrc: string;
+  quantity: number;
 };
 
 async function searchForProduct() {
@@ -15,7 +16,7 @@ async function searchForProduct() {
   const aisle = findProductAisle();
   const imgSrc = findImageSrc();
   if (!name || !aisle || !imgSrc) return;
-  const item = { name, aisle, imgSrc };
+  const item = { name, aisle, imgSrc, quantity: 1 };
   createListButtonFor(item);
 }
 
@@ -59,6 +60,7 @@ function createListButtonFor(item: PageItem) {
 
 async function addToList(item: PageItem) {
   const listId = await getListId();
+  console.log('LIST ID', listId);
   const output = await addItemToList({ ...item, listId });
   await setListId(output.listId);
 }

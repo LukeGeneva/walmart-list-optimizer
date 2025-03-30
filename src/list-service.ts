@@ -1,10 +1,11 @@
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://walmart-list.l8a.dev';
 
 type AddItemToListInput = {
   name: string;
   aisle: string;
   imgSrc: string;
   listId: string | null;
+  quantity: number;
 };
 
 export async function addItemToList(input: AddItemToListInput) {

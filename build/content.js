@@ -8,7 +8,7 @@ async function setListId(listId) {
 }
 
 // src/list-service.ts
-var API_BASE_URL = "http://localhost:3000";
+var API_BASE_URL = "https://walmart-list.l8a.dev";
 async function addItemToList(input) {
   const response = await fetch(url("/list"), {
     method: "POST",
@@ -30,7 +30,7 @@ async function searchForProduct() {
   const imgSrc = findImageSrc();
   if (!name || !aisle || !imgSrc)
     return;
-  const item = { name, aisle, imgSrc };
+  const item = { name, aisle, imgSrc, quantity: 1 };
   createListButtonFor(item);
 }
 function findProductName() {
@@ -66,6 +66,7 @@ function createListButtonFor(item) {
 }
 async function addToList(item) {
   const listId = await getListId();
+  console.log("LIST ID", listId);
   const output = await addItemToList({ ...item, listId });
   await setListId(output.listId);
 }
